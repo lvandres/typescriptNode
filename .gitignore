@@ -1,0 +1,8 @@
+logs
+*.log
+npm-debug.log*
+node_modules/
+docker-compose.yml
+package-lock.json
+database/
+application/dist/*

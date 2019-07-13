@@ -1,0 +1,26 @@
+{
+    "name": "application",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node dist/app.js",
+        "dev": "nodemon app.ts",
+        "build": "tsc -p ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "tsc-watch": "^2.2.1",
+        "tslint": "^5.18.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.0",
+        "@types/node": "^12.6.2",
+        "nodemon": "^1.19.1",
+        "ts-node": "^8.3.0",
+        "typescript": "^3.5.3"
+    }
+}
