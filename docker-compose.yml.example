@@ -11,3 +11,34 @@ services:
     environment:
       DATABASE_URL: postgres://todoapp@postgres/todos
       PORT_APP: 3000
+version: '2'
+services:
+  web:
+    build: .
+    command: npm run dev
+    volumes:
+      - ./application:/usr/app/
+      - /usr/app/node_modules
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      PRODUCTION: changed
+      PORT_APP: 3000
+      SENTRY_DSN: changed
+      POSTGRES_PASSWORD: changed
+      POSTGRES_DB: changed
+      POSTGRES_HOST: changed
+      POSTGRES_USER: changed
+  postgres:
+    image: postgres:9.4.23-alpine
+    environment:
+      POSTGRES_PASSWORD: changed
+      POSTGRES_DB: changed
+    ports:
+      - "5432:5432"
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080

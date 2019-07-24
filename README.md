@@ -26,6 +26,9 @@ cd typescriptNode
 npm install
 ```
 
+## Technologies
+- [SENTRY](https://sentry.io/welcome/): Monitoring platform that helps you identify issues in real-time.
+
 ## Template
 
 This project use `Materialize`
