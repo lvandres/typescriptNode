@@ -28,12 +28,11 @@ npm install
 
 ## Technologies
 - [SENTRY](https://sentry.io/welcome/): Monitoring platform that helps you identify issues in real-time.
+- [WINSTON](https://www.npmjs.com/package/winston): An effective logging solution is crucial to the success of any application.
 
 ## Template
 
-This project use `Materialize`
-
-[Documentation](https://materializecss.com/getting-started.html)
+This project use [Materialize](https://materializecss.com/getting-started.html)
 
 
 

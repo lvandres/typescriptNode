@@ -1,10 +1,11 @@
 import express, { Application, RequestHandler, ErrorRequestHandler } from 'express';
 import * as Sentry from '@sentry/node';
 import morgan from 'morgan';
+import logger from './utils/logger'
 
 import connection from './models/db-connection'
 // Import Routes
-import IndexRoutes from './routes/index';
+//import IndexRoutes from './routes/index';
 
 export class App {
     private app: Application;
@@ -15,7 +16,7 @@ export class App {
     }
 
     private addRoutes(): void {
-        this.app.use(IndexRoutes);
+        //this.app.use(IndexRoutes);
     }
 
     private settings(): void{
@@ -28,8 +29,8 @@ export class App {
         this.app.use(Sentry.Handlers.errorHandler() as ErrorRequestHandler);
 
         connection.authenticate()
-            .then(() => console.log('Database connected...'))
-            .catch((err: any) => console.log('Error: ' + err));
+            .then(() => logger.info('Database connected...'))
+            .catch((err: any) => logger.error('The error was: ', err) );
     }
 
     
@@ -37,6 +38,6 @@ export class App {
     async listen(): Promise<void> {
         const PORT = process.env.PORT_APP || 3000;
         await this.app.listen(PORT);
-        console.log('Server on port', PORT);
+        logger.info(`Server on port ${PORT}`);
     }
 }
