@@ -1,11 +1,9 @@
 import express, { Application, RequestHandler, ErrorRequestHandler } from 'express';
 import * as Sentry from '@sentry/node';
 import morgan from 'morgan';
-import logger from './utils/logger'
-
-import connection from './models/db-connection'
-// Import Routes
-//import IndexRoutes from './routes/index';
+import logger from './utils/logger';
+import { createConnection } from "typeorm";
+import { DB_CONFIG } from './utils/db.config';
 
 export class App {
     private app: Application;
@@ -19,18 +17,19 @@ export class App {
         //this.app.use(IndexRoutes);
     }
 
-    private settings(): void{
+    private async settings(){
         const SENTRY_DSN = process.env.SENTRY_DSN;
         
         if(!process.env.PRODUCTION) this.app.use(morgan('dev'));
-        Sentry.init({ dsn: SENTRY_DSN });
-        this.app.use(Sentry.Handlers.requestHandler() as RequestHandler);
-        this.addRoutes();
-        this.app.use(Sentry.Handlers.errorHandler() as ErrorRequestHandler);
-
-        connection.authenticate()
-            .then(() => logger.info('Database connected...'))
-            .catch((err: any) => logger.error('The error was: ', err) );
+        try {
+            Sentry.init({ dsn: SENTRY_DSN });
+            this.app.use(Sentry.Handlers.requestHandler() as RequestHandler);
+            await createConnection(DB_CONFIG);
+            this.addRoutes();
+            this.app.use(Sentry.Handlers.errorHandler() as ErrorRequestHandler);
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     
