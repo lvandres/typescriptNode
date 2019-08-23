@@ -1,0 +1,25 @@
+{
+    "name": "default",
+    "type": "postgres",
+    "host": "change",
+    "port": 5432,
+    "username": "change",
+    "password": "change",
+    "database": "change",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+      "database/entity/*{.ts,.js}"
+    ],
+    "subscribers": [
+      "database/subscriber/*.ts"
+    ],
+    "migrations": [
+      "database/migration/*{.ts,.js}"
+    ],
+    "cli": {
+      "entitiesDir": "database/entity",
+      "migrationsDir": "database/migration",
+      "subscribersDir": "database/subscriber"
+    }
+}

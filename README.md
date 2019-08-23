@@ -29,10 +29,11 @@ npm install
 ## Technologies
 - [SENTRY](https://sentry.io/welcome/): Monitoring platform that helps you identify issues in real-time.
 - [WINSTON](https://www.npmjs.com/package/winston): An effective logging solution is crucial to the success of any application.
+- [TYPEORM](https://typeorm.io/): Is an ORM that can run in NodeJS, supports both Active Record and Data Mapper patterns.
 
-## Template
+## Nota
 
-This project use [Materialize](https://materializecss.com/getting-started.html)
+- To use the TYPEORM cli configure the config/orm.config.json file
 
 
 

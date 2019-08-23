@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add sentry to application.
 - Add winston to application.
 - Add typeorm to application.
+- Add typeorm config.
