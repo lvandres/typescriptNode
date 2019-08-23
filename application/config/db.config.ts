@@ -11,17 +11,17 @@ export const DB_CONFIG: ConnectionOptions = {
     "synchronize": true,
     "logging": false,
     "entities": [
-      "entity/*.ts"
+      "database/entity/*.ts"
     ],
     "subscribers": [
-      "subscriber/*.ts"
+      "database/subscriber/*.ts"
     ],
     "migrations": [
-      "migration/*.ts"
+      "database/migration/*.ts"
     ],
     "cli": {
-      "entitiesDir": "entity",
-      "migrationsDir": "migration",
-      "subscribersDir": "subscriber"
+      "entitiesDir": "database/entity",
+      "migrationsDir": "database/migration",
+      "subscribersDir": "database/subscriber"
     }
 }

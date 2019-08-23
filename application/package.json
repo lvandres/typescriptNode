@@ -6,7 +6,10 @@
     "scripts": {
         "start": "node dist/index.js",
         "dev": "nodemon index.ts",
-        "build": "tsc -p ."
+        "build": "tsc -p .",
+        "migration:generate": "ts-node node_modules/.bin/typeorm migration:generate --config ./config/orm.config.json --name",
+        "migration:run": "ts-node node_modules/.bin/typeorm migration:run --config ./config/orm.config.json",
+        "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert --config ./config/orm.config.json"
     },
     "keywords": [],
     "author": "",

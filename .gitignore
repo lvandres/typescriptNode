@@ -7,3 +7,4 @@ package-lock.json
 database/
 application/dist/*
 logs/*
+application/config/orm.config.json
