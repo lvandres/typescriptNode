@@ -1,14 +1,8 @@
 import { Router } from "express";
+import UserController from "../controllers/user.controller";
 
 const router = Router();
 
-router.get('/', async (req, res, next) => {
-    try {
-      res.json('exelent');
-    } catch (e) {
-        res.sendStatus(400);
-      next(e);
-    }
-});
+router.get('/', UserController.listAll);
 
 export default router;
