@@ -4,6 +4,6 @@ import user from "./users.routes";
 
 const routes = Router();
 
-routes.use("", user);
+routes.use("/users", user);
 
 export default routes;

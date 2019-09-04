@@ -3,9 +3,11 @@
         "lib": ["es5", "es6"],
         "target": "es6",
         "module": "commonjs",
+        "declaration": false,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
+        "removeComments": true,
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
@@ -26,6 +28,7 @@
         "./**/*"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "**/*.spec.ts"
     ]
 }

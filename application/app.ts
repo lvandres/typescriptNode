@@ -2,9 +2,8 @@ import express, { Application, RequestHandler, ErrorRequestHandler } from 'expre
 import * as Sentry from '@sentry/node';
 import morgan from 'morgan';
 import logger from './utils/logger';
-import { createConnection } from "typeorm";
-import { DB_CONFIG } from './config/db.config';
 import routes from './routes/index.routes';
+import cors from 'cors';
 
 export class App {
     private app: Application;
@@ -15,7 +14,7 @@ export class App {
     }
 
     private addRoutes(): void {
-        this.app.use(routes);
+        this.app.use('/api/v1', routes);
     }
 
     private async settings(){
@@ -25,7 +24,7 @@ export class App {
         try {
             Sentry.init({ dsn: SENTRY_DSN });
             this.app.use(Sentry.Handlers.requestHandler() as RequestHandler);
-            await createConnection(DB_CONFIG);
+            this.app.use(cors());
             this.addRoutes();
             this.app.use(Sentry.Handlers.errorHandler() as ErrorRequestHandler);
         } catch(error) {
