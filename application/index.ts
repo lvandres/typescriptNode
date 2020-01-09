@@ -1,8 +1,7 @@
+import "reflect-metadata";
+
+import { Container } from "typescript-ioc";
 import { App } from './app'
 
-async function main() {
-    const app = new App();
-    await app.listen();
-}
-
-main();
+const app: App = Container.get(App);
+app.start();

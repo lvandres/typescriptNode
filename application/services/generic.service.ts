@@ -35,11 +35,12 @@ export abstract class GenericService<ENTITY> implements IService<ENTITY> {
         return await this.repository.find();
     }
     
-    async findById(id: any): Promise<ENTITY> {
-        const findOptions = { id: id };
-        return await this.repository.findOne({
-            where: findOptions
-        });
+    async findById(id: string): Promise<ENTITY> {
+        const result = await this.repository.findOne(id);
+        if (!result) {
+            throw new Error("No director was found for ID: " + id);
+        }
+        return result;
     }
     
     async findByIds(ids: any[]): Promise<ENTITY[]> {

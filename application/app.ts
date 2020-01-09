@@ -1,42 +1,42 @@
-import express, { Application, RequestHandler, ErrorRequestHandler } from 'express';
-import * as Sentry from '@sentry/node';
-import morgan from 'morgan';
-import logger from './utils/logger';
-import routes from './routes/index.routes';
-import cors from 'cors';
+
+import * as Koa from "koa";
+import * as bodyParser from "koa-bodyparser";
+import * as logger from "koa-logger";
+import * as Router from "koa-router";
+
+import { createConnection } from "typeorm";
+import { Inject } from "typescript-ioc";
+import { DB_CONFIG } from './config/db.config';
+
+import DirectorRoutes from "./routes/DirectorRoutes";
+// import MovieRoutes from "./routes/MovieRoutes";
 
 export class App {
-    private app: Application;
+    constructor(
+        // @Inject private movieRoutes: MovieRoutes,
+        @Inject private directorRoutes: DirectorRoutes) { }
 
-    constructor() {
-        this.app = express();
-        this.settings();
+    private async createApp() {
+        await createConnection(DB_CONFIG);
+
+        const app: Koa = new Koa();
+        const router: Router = new Router();
+
+        // this.movieRoutes.register(router);
+        this.directorRoutes.register(router);
+
+        app.use(logger());
+        app.use(bodyParser());
+        app.use(router.routes());
+        app.use(router.allowedMethods());
+
+        return Promise.resolve(app);
     }
 
-    private addRoutes(): void {
-        this.app.use('/api/v1', routes);
-    }
-
-    private async settings(){
-        const SENTRY_DSN = process.env.SENTRY_DSN;
-        
-        if(!process.env.PRODUCTION) this.app.use(morgan('dev'));
-        try {
-            Sentry.init({ dsn: SENTRY_DSN });
-            this.app.use(Sentry.Handlers.requestHandler() as RequestHandler);
-            this.app.use(cors());
-            this.addRoutes();
-            this.app.use(Sentry.Handlers.errorHandler() as ErrorRequestHandler);
-        } catch(error) {
-            logger.error(error);
-        }
-    }
-
-    
-
-    async listen(): Promise<void> {
-        const PORT = process.env.PORT_APP || 3000;
-        await this.app.listen(PORT);
-        logger.info(`Server on port ${PORT}`);
+    public async start() {
+        const app = await this.createApp();
+        console.log("Started listening on port 3000...");
+        const server = app.listen(3000);
+        return Promise.resolve(server);
     }
 }
