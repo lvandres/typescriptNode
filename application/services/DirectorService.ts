@@ -4,6 +4,7 @@ import BadRequestEntity from "../exceptions/BadRequestEntity";
 import EntityNotFoundError from "../exceptions/EntityNotFoundError";
 import Director from "../database/entity/Director";
 import DirectorRepository from "../repositories/DirectorRepository";
+import { InsertResult } from "typeorm";
 
 @Singleton
 export default class DirectorService {
@@ -18,7 +19,7 @@ export default class DirectorService {
         return this.directorRepository.getAllDirectors();
     }
 
-    public async save(director: Director): Promise<Director> {
+    public async save(director: Director): Promise<InsertResult> {
         return this.directorRepository.saveDirector(director);
     }
 

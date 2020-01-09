@@ -1,9 +1,18 @@
-import { Router } from "express";
+import * as Router from "koa-router";
+import { Inject } from "typescript-ioc";
 
-import user from "./users.routes";
+import DirectorRoutes from "./DirectorRoutes";
 
-const routes = Router();
 
-routes.use("/users", user);
+export default class CustomRouter extends Router {
+    constructor(
+        @Inject private directorRoutes: DirectorRoutes
+    ) {
+        super({ prefix: '/api/v1' });
+        this.addRoutes();
+    }
 
-export default routes;
+    addRoutes() {
+        this.directorRoutes.register(this);
+    }
+};

@@ -2,28 +2,24 @@
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
 import * as logger from "koa-logger";
-import * as Router from "koa-router";
+// import * as Router from "koa-router";
+import { Container } from "typescript-ioc";
 
 import { createConnection } from "typeorm";
 import { Inject } from "typescript-ioc";
 import { DB_CONFIG } from './config/db.config';
 
 import DirectorRoutes from "./routes/DirectorRoutes";
-// import MovieRoutes from "./routes/MovieRoutes";
+import Router from "./routes/index.routes";
 
 export class App {
-    constructor(
-        // @Inject private movieRoutes: MovieRoutes,
-        @Inject private directorRoutes: DirectorRoutes) { }
+    constructor() { }
 
     private async createApp() {
         await createConnection(DB_CONFIG);
 
         const app: Koa = new Koa();
-        const router: Router = new Router();
-
-        // this.movieRoutes.register(router);
-        this.directorRoutes.register(router);
+        const router: Router = Container.get(Router);
 
         app.use(logger());
         app.use(bodyParser());
