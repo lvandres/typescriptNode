@@ -5,7 +5,7 @@ import { DB_CONFIG } from '../config/db.config';
 export interface IService<ENTITY> {
     initializeRepository(): void;
     
-    findAll(): Promise<ENTITY[]>;
+    findAll(page: number): Promise<ENTITY[]>;
 
     findById(id: any): Promise<ENTITY>;
     
@@ -31,8 +31,11 @@ export abstract class GenericService<ENTITY> implements IService<ENTITY> {
         this.initializeRepository();
     }
     
-    async findAll(): Promise<ENTITY[]> {
-        return await this.repository.find();
+    async findAll(page: number): Promise<ENTITY[]> {
+        return await this.repository
+            .createQueryBuilder("dos")
+            .skip(page)
+            .getMany();
     }
     
     async findById(id: string): Promise<ENTITY> {

@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export default class Director {
 
     @PrimaryGeneratedColumn()
-    private id: number;
+    private id: string;
     @Column()
     private firstName: string;
     @Column()
@@ -12,11 +12,11 @@ export default class Director {
     @Column()
     private birthYear: number;
 
-    public get $id(): number {
+    public get $id(): string {
         return this.id;
     }
 
-    public set $id(value: number) {
+    public set $id(value: string) {
         this.id = value;
     }
 
@@ -44,7 +44,7 @@ export default class Director {
         this.birthYear = value;
     }
 
-    public static newDirector(obj: { id?: number, firstName?: string, lastName?: string, birthYear?: number }) {
+    public static newDirector(obj: { id?: string, firstName?: string, lastName?: string, birthYear?: number }) {
         const newDirector = new Director();
         if (obj.id) newDirector.id = obj.id;
         if (obj.firstName) newDirector.firstName = obj.firstName;

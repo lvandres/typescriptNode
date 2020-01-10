@@ -1,14 +1,12 @@
 import { Repository, InsertResult, FindOneOptions } from 'typeorm';
-import { getManager } from "typeorm";
-import Director from "../database/entity/Director";
 
 export interface IRepository<ENTITY> {
   
-  findAll(): Promise<ENTITY[]>;
+  findAll(page: number, take: number): Promise<ENTITY[]>;
 
-  findById(id: any): Promise<ENTITY>;
+  findById(id: string): Promise<ENTITY>;
   
-  findByIds(ids: any[]): Promise<ENTITY[]>;
+  findByIds(ids: string[]): Promise<ENTITY[]>;
   
   destroy(object: ENTITY): Promise<ENTITY>;
   
@@ -30,11 +28,15 @@ export abstract class GenericRepository<ENTITY> implements IRepository<ENTITY> {
     this.initializeRepository();
   }
   
-  async findAll(): Promise<ENTITY[]> {
-    return await this.repository.find();
+  async findAll(page: number = 0, take: number = 10): Promise<ENTITY[]> {
+    return await this.repository
+      .createQueryBuilder(this.repository.metadata.name)
+      .skip(page * take)
+      .take(take)
+      .getMany();
   }
 
-  async findById(id: number): Promise<ENTITY> {
+  async findById(id: string): Promise<ENTITY> {
     const result = await this.repository.findOne(id);
     if(!result) {
       throw('Not found');
@@ -42,7 +44,7 @@ export abstract class GenericRepository<ENTITY> implements IRepository<ENTITY> {
     return result;
   }
 
-  async findByIds(ids: any[]): Promise<ENTITY[]> {
+  async findByIds(ids: string[]): Promise<ENTITY[]> {
     return await this.repository.findByIds(ids);
   }
 

@@ -9,7 +9,8 @@ export default class DirectorController {
     constructor( @Inject private directorService: DirectorService) { }
 
     public async getAllDirectors(ctx: IRouterContext) {
-        ctx.body = await this.directorService.findAll();
+        const page = ctx.params.page || 0;
+        ctx.body = await this.directorService.findAll(page);
     }
 
     public async findDirectorById(ctx: IRouterContext) {

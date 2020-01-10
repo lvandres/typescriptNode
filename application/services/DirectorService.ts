@@ -11,12 +11,12 @@ export default class DirectorService {
 
     constructor( @Inject private directorRepository: DirectorRepository) { }
 
-    public async findById(id: number): Promise<Director> {
+    public async findById(id: string): Promise<Director> {
         return this.directorRepository.findById(id);
     }
 
-    public async findAll(): Promise<Director[]> {
-        return this.directorRepository.findAll();
+    public async findAll(page: number): Promise<Director[]> {
+        return this.directorRepository.findAll(page);
     }
 
     public async save(director: Director): Promise<InsertResult> {
@@ -34,7 +34,7 @@ export default class DirectorService {
         }
     }
 
-    public async delete(directorId: number) {
+    public async delete(directorId: string) {
         try {
             const director = await this.directorRepository.findById(directorId);
             return this.directorRepository.destroy(director);
