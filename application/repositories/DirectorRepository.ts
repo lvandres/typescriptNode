@@ -2,19 +2,18 @@ import { Singleton } from "typescript-ioc";
 import { getManager, InsertResult } from "typeorm";
 import EntityNotFoundError from "../exceptions/EntityNotFoundError";
 import Director from "../database/entity/Director";
-import GenericRepository from "../repositories/IRepository";
+import { GenericRepository, IRepository } from "./GenericRepository";
 
 @Singleton
-export default class DirectorRepository extends GenericRepository<Director> {
+export default class DirectorRepository extends GenericRepository<Director> implements IRepository<Director> {
 
   constructor() {
     super();
-    // getManager().getRepository(Director)
   }
 
   async initializeRepository() {
     this.repository = getManager().getRepository(Director);
-}
+  }
 
   public async getAllDirectors(): Promise<Director[]> {
     return this.findAll();

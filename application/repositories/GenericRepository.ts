@@ -22,7 +22,7 @@ export interface IRepository<ENTITY> {
 }
 
 
-export default abstract class GenericRepository<ENTITY> implements IRepository<ENTITY> {
+export abstract class GenericRepository<ENTITY> implements IRepository<ENTITY> {
   protected repository: Repository<ENTITY>;
   public abstract initializeRepository(): void;
 
