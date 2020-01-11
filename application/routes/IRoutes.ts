@@ -1,5 +1,5 @@
 import * as Router from "koa-router";
-import Route from "../models/Route";
+import Route from "../shared/models/Route";
 
 export abstract class IRoutes {
 

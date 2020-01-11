@@ -1,7 +1,7 @@
 import { IRouterContext } from "koa-router";
 import { Inject } from "typescript-ioc";
 import DirectorController from "../controllers/DirectorController";
-import Route from "../models/Route";
+import Route from "../shared/models/Route";
 import IRoutes from "./IRoutes";
 
 export default class DirectorRoutes extends IRoutes {

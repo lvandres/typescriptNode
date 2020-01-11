@@ -1,6 +1,5 @@
 import { Singleton } from "typescript-ioc";
-import { getManager, InsertResult } from "typeorm";
-import EntityNotFoundError from "../exceptions/EntityNotFoundError";
+import { getManager } from "typeorm";
 import Director from "../database/entity/Director";
 import { GenericRepository, IRepository } from "./GenericRepository";
 

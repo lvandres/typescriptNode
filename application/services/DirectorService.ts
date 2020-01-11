@@ -4,6 +4,7 @@ import BadRequestEntity from "../exceptions/BadRequestEntity";
 import EntityNotFoundError from "../exceptions/EntityNotFoundError";
 import Director from "../database/entity/Director";
 import DirectorRepository from "../repositories/DirectorRepository";
+import { EntitiesResponse } from '../shared/responses/IEntitiesResponse';
 import { InsertResult } from "typeorm";
 
 @Singleton
@@ -15,7 +16,7 @@ export default class DirectorService {
         return this.directorRepository.findById(id);
     }
 
-    public async findAll(page: number): Promise<Director[]> {
+    public async findAll(page: number): Promise<EntitiesResponse<Director>> {
         return this.directorRepository.findAll(page);
     }
 
