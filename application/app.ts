@@ -2,15 +2,12 @@
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
 import * as logger from "koa-logger";
-// import * as Router from "koa-router";
 import { Container } from "typescript-ioc";
 
 import { createConnection } from "typeorm";
-import { Inject } from "typescript-ioc";
 import { DB_CONFIG } from './config/db.config';
 
-import DirectorRoutes from "./routes/DirectorRoutes";
-import Router from "./routes/index.routes";
+import Router from "./routes/IndexRoutes";
 
 export class App {
     constructor() { }
