@@ -1,4 +1,4 @@
-import Director from "../../database/entity/Director";
+import Director from '../../database/entity/Director';
 
 export default class DirectorTestBuilder {
 
@@ -37,8 +37,8 @@ export default class DirectorTestBuilder {
 
 	public withDefaultValues(): DirectorTestBuilder {
 		return this
-			.withFirstName("John")
-			.withLastName("Lasseter")
+			.withFirstName('John')
+			.withLastName('Lasseter')
 			.withBirthYear(1966);
 	}
 

@@ -1,13 +1,12 @@
+import * as Koa from 'koa';
+import * as bodyParser from 'koa-bodyparser';
+import * as logger from 'koa-logger';
+import { Container } from 'typescript-ioc';
 
-import * as Koa from "koa";
-import * as bodyParser from "koa-bodyparser";
-import * as logger from "koa-logger";
-import { Container } from "typescript-ioc";
-
-import { createConnection } from "typeorm";
+import { createConnection } from 'typeorm';
 import { DB_CONFIG } from './config/db.config';
 
-import Router from "./routes/IndexRoutes";
+import Router from './routes/IndexRoutes';
 
 export class App {
 	constructor() { }
@@ -28,7 +27,7 @@ export class App {
 
 	public async start() {
 		const app = await this.createApp();
-		console.log("Started listening on port 3000...");
+		console.log('Started listening on port 3000...');
 		const server = app.listen(3000);
 		return Promise.resolve(server);
 	}

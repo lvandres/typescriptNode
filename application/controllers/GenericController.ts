@@ -1,5 +1,5 @@
-import { IRouterContext } from "koa-router";
-import { GenericService } from "../services/GenericService";
+import { IRouterContext } from 'koa-router';
+import { GenericService } from '../services/GenericService';
 
 export interface IController {
 	getAll(ctx: IRouterContext): Promise<void>;

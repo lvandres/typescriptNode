@@ -1,6 +1,6 @@
-import * as winston from "winston";
+import * as winston from 'winston';
 
-let logger = winston.createLogger({
+const logger = winston.createLogger({
 	format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
 	level: 'info',
 	transports: [

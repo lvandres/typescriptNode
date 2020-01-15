@@ -1,7 +1,7 @@
-import { IRouterContext } from "koa-router";
-import { Inject } from "typescript-ioc";
-import UserController from "../controllers/UserController";
-import * as Router from "koa-router";
+import { IRouterContext } from 'koa-router';
+import { Inject } from 'typescript-ioc';
+import UserController from '../controllers/UserController';
+import * as Router from 'koa-router';
 
 export default class UserRoutes {
 

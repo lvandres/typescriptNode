@@ -1,11 +1,11 @@
-import { IsEmail, IsNotEmpty, Length } from "class-validator";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Role } from "../../shared/enums/role";
+import { IsEmail, IsNotEmpty, Length } from 'class-validator';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Role } from '../../shared/enums/role';
 
 @Entity()
 export default class User {
 
-	@PrimaryGeneratedColumn("uuid")
+	@PrimaryGeneratedColumn('uuid')
 	private id: string;
 
 	@Column({ unique: true })

@@ -1,14 +1,14 @@
-import { expect } from "chai";
-import "mocha";
+import { expect } from 'chai';
+import 'mocha';
 
-import { instance, mock, verify, when } from "ts-mockito/lib/ts-mockito";
-import Director from "../../database/entity/Director";
-import DirectorRepository from "../../repositories/DirectorRepository";
-import DirectorService from "../../services/DirectorService";
-import DirectorTestBuilder from "../testutils/DirectorTestBuilder";
-import { Pagination } from "../../shared/models/pagination";
+import { instance, mock, verify, when } from 'ts-mockito/lib/ts-mockito';
+import Director from '../../database/entity/Director';
+import DirectorRepository from '../../repositories/DirectorRepository';
+import DirectorService from '../../services/DirectorService';
+import DirectorTestBuilder from '../testutils/DirectorTestBuilder';
+import { Pagination } from '../../shared/models/pagination';
 
-describe("DirectorService", () => {
+describe('DirectorService', () => {
 
 	let serviceUnderTest: DirectorService;
 	let directorRepository: DirectorRepository;
@@ -25,9 +25,9 @@ describe("DirectorService", () => {
 		);
 	});
 
-	describe("findAll", () => {
+	describe('findAll', () => {
 
-		it("should return the 5 dummy directors", async () => {
+		it('should return the 5 dummy directors', async () => {
 			const response = {
 				pagination: new Pagination(),
 				records: testDirectorList
@@ -38,9 +38,9 @@ describe("DirectorService", () => {
 		});
 	});
 
-	describe("findById", () => {
+	describe('findById', () => {
 
-		it("should return the director with given Id if the director exists", async () => {
+		it('should return the director with given Id if the director exists', async () => {
 			when(directorRepository.findById(testId)).thenReturn(Promise.resolve(testDirectorWithId));
 			const actual = await serviceUnderTest.findById(testId);
 			expect(actual).to.equal(testDirectorWithId);

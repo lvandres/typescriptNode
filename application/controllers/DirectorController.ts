@@ -1,7 +1,7 @@
-import { IRouterContext } from "koa-router";
-import { Inject, Singleton } from "typescript-ioc";
-import Director from "../database/entity/Director";
-import DirectorService from "../services/DirectorService";
+import { IRouterContext } from 'koa-router';
+import { Inject, Singleton } from 'typescript-ioc';
+import Director from '../database/entity/Director';
+import DirectorService from '../services/DirectorService';
 
 @Singleton
 export default class DirectorController {

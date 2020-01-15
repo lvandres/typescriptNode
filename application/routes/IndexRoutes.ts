@@ -1,8 +1,8 @@
-import * as Router from "koa-router";
-import { Inject } from "typescript-ioc";
+import * as Router from 'koa-router';
+import { Inject } from 'typescript-ioc';
 
-import DirectorRoutes from "./DirectorRoutes";
-import UserRoutes from "./UsersRoutes";
+import DirectorRoutes from './DirectorRoutes';
+import UserRoutes from './UsersRoutes';
 
 
 export default class IndexRouter extends Router {
@@ -18,4 +18,4 @@ export default class IndexRouter extends Router {
 		this.userRoutes.addRoutes(this);
 		this.directorRoutes.addRoutes(this);
 	}
-};
+}

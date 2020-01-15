@@ -6,7 +6,9 @@
     "scripts": {
         "start": "node dist/index.js",
         "dev": "nodemon index.ts",
-        "build": "tsc -p .",
+        "build-ts": "tsc",
+        "build": "npm run tslint && npm run build-ts",
+        "tslint": "tslint -c tslint.json -p tsconfig.json",
         "test": "mocha -r ts-node/register test/**/*.spec.ts",
         "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test",
         "migration:generate": "ts-node node_modules/.bin/typeorm migration:generate --config ./config/orm.config.json --name",
