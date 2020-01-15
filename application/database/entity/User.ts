@@ -107,16 +107,17 @@ export default class User {
 
     public static newUser(obj: { 
         id?: string, email?: string, password?: string,
-        role?: number, name?: string, lastName?: string
+        role?: number, name?: string, lastName?: string,
+        isActive?: boolean
     }) {
         const newUser = new User();
-        if (obj.id) newUser.id = obj.id;
-        if (obj.email) newUser.email = obj.email;
-        if (obj.password) newUser.password = obj.password;
-        if (obj.name) newUser.name = obj.name;
-        if (obj.lastName) newUser.lastName = obj.lastName;
-        if (obj.role) newUser.role = obj.role;
-        newUser.createdAt = new Date();
+        if (obj.id) newUser.Id = obj.id;
+        if (obj.email) newUser.Email = obj.email;
+        if (obj.password) newUser.Password = obj.password;
+        if (obj.name) newUser.Name = obj.name;
+        if (obj.lastName) newUser.LastName = obj.lastName;
+        if (obj.role) newUser.Role = obj.role;
+        newUser.IsActive = obj.isActive || false;
         return newUser;
     }
 }

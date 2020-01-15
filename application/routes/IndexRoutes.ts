@@ -15,7 +15,7 @@ export default class IndexRouter extends Router {
     }
 
     addRoutes() {
-        this.directorRoutes.register(this);
-        this.userRoutes.register(this);
+        this.userRoutes.addRoutes(this);
+        this.directorRoutes.addRoutes(this);
     }
 };
