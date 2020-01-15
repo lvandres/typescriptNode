@@ -10,42 +10,42 @@ import { Pagination } from "../../shared/models/pagination";
 
 describe("DirectorService", () => {
 
-    let serviceUnderTest: DirectorService;
-    let directorRepository: DirectorRepository;
+	let serviceUnderTest: DirectorService;
+	let directorRepository: DirectorRepository;
 
-    const testId = '912e99b4-3e7a-4894-aaef-793312094fff';
-    const testDirectorList = DirectorTestBuilder.getListOfDefaultDirectors(5);
-    const testDirectorWithId = DirectorTestBuilder.newDirector().withDefaultValues().withId(testId).build();
-    const testDirectorWithoutId = DirectorTestBuilder.newDirector().withDefaultValues().build();
+	const testId = '912e99b4-3e7a-4894-aaef-793312094fff';
+	const testDirectorList = DirectorTestBuilder.getListOfDefaultDirectors(5);
+	const testDirectorWithId = DirectorTestBuilder.newDirector().withDefaultValues().withId(testId).build();
+	const testDirectorWithoutId = DirectorTestBuilder.newDirector().withDefaultValues().build();
 
-    beforeEach(() => {
-        directorRepository = mock(DirectorRepository);
-        serviceUnderTest = new DirectorService(
-            instance(directorRepository),
-        );
-    });
+	beforeEach(() => {
+		directorRepository = mock(DirectorRepository);
+		serviceUnderTest = new DirectorService(
+			instance(directorRepository),
+		);
+	});
 
-    describe("findAll", () => {
+	describe("findAll", () => {
 
-        it("should return the 5 dummy directors", async () => {
-            const response = {
-                pagination: new Pagination(),
-                records: testDirectorList
-            };
-            when(directorRepository.findAll(1)).thenReturn(Promise.resolve(response));
-            const actual = await serviceUnderTest.findAll(1);
-            expect(actual.records).to.include(testDirectorList[0]);
-        });
-    });
+		it("should return the 5 dummy directors", async () => {
+			const response = {
+				pagination: new Pagination(),
+				records: testDirectorList
+			};
+			when(directorRepository.findAll(1)).thenReturn(Promise.resolve(response));
+			const actual = await serviceUnderTest.findAll(1);
+			expect(actual.records).to.include(testDirectorList[0]);
+		});
+	});
 
-    describe("findById", () => {
+	describe("findById", () => {
 
-        it("should return the director with given Id if the director exists", async () => {
-            when(directorRepository.findById(testId)).thenReturn(Promise.resolve(testDirectorWithId));
-            const actual = await serviceUnderTest.findById(testId);
-            expect(actual).to.equal(testDirectorWithId);
-        });
+		it("should return the director with given Id if the director exists", async () => {
+			when(directorRepository.findById(testId)).thenReturn(Promise.resolve(testDirectorWithId));
+			const actual = await serviceUnderTest.findById(testId);
+			expect(actual).to.equal(testDirectorWithId);
+		});
 
-    });
+	});
 
 });

@@ -6,16 +6,16 @@ import UserRoutes from "./UsersRoutes";
 
 
 export default class IndexRouter extends Router {
-    constructor(
-        @Inject private directorRoutes: DirectorRoutes,
-        @Inject private userRoutes: UserRoutes
-    ) {
-        super({ prefix: '/api/v1' });
-        this.addRoutes();
-    }
+	constructor(
+		@Inject private directorRoutes: DirectorRoutes,
+		@Inject private userRoutes: UserRoutes
+	) {
+		super({ prefix: '/api/v1' });
+		this.addRoutes();
+	}
 
-    addRoutes() {
-        this.userRoutes.addRoutes(this);
-        this.directorRoutes.addRoutes(this);
-    }
+	addRoutes() {
+		this.userRoutes.addRoutes(this);
+		this.directorRoutes.addRoutes(this);
+	}
 };

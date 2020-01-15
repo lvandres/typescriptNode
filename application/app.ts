@@ -10,26 +10,26 @@ import { DB_CONFIG } from './config/db.config';
 import Router from "./routes/IndexRoutes";
 
 export class App {
-    constructor() { }
+	constructor() { }
 
-    private async createApp() {
-        await createConnection(DB_CONFIG);
+	private async createApp() {
+		await createConnection(DB_CONFIG);
 
-        const app: Koa = new Koa();
-        const router: Router = Container.get(Router);
+		const app: Koa = new Koa();
+		const router: Router = Container.get(Router);
 
-        app.use(logger());
-        app.use(bodyParser());
-        app.use(router.routes());
-        app.use(router.allowedMethods());
+		app.use(logger());
+		app.use(bodyParser());
+		app.use(router.routes());
+		app.use(router.allowedMethods());
 
-        return Promise.resolve(app);
-    }
+		return Promise.resolve(app);
+	}
 
-    public async start() {
-        const app = await this.createApp();
-        console.log("Started listening on port 3000...");
-        const server = app.listen(3000);
-        return Promise.resolve(server);
-    }
+	public async start() {
+		const app = await this.createApp();
+		console.log("Started listening on port 3000...");
+		const server = app.listen(3000);
+		return Promise.resolve(server);
+	}
 }

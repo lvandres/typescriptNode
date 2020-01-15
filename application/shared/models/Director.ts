@@ -1,50 +1,50 @@
 
 export default class Director {
 
-    private id: number;
-    private firstName: string;
-    private lastName: string;
-    private birthYear: number;
+	private id: number;
+	private firstName: string;
+	private lastName: string;
+	private birthYear: number;
 
-    public get $id(): number {
-        return this.id;
-    }
+	public get $id(): number {
+		return this.id;
+	}
 
-    public set $id(value: number) {
-        this.id = value;
-    }
+	public set $id(value: number) {
+		this.id = value;
+	}
 
-    public get $firstName(): string {
-        return this.firstName;
-    }
+	public get $firstName(): string {
+		return this.firstName;
+	}
 
-    public set $firstName(value: string) {
-        this.firstName = value;
-    }
+	public set $firstName(value: string) {
+		this.firstName = value;
+	}
 
-    public get $lastName(): string {
-        return this.lastName;
-    }
+	public get $lastName(): string {
+		return this.lastName;
+	}
 
-    public set $lastName(value: string) {
-        this.lastName = value;
-    }
+	public set $lastName(value: string) {
+		this.lastName = value;
+	}
 
-    public get $birthYear(): number {
-        return this.birthYear;
-    }
+	public get $birthYear(): number {
+		return this.birthYear;
+	}
 
-    public set $birthYear(value: number) {
-        this.birthYear = value;
-    }
+	public set $birthYear(value: number) {
+		this.birthYear = value;
+	}
 
-    public static newDirector(obj: { id?: number, firstName?: string, lastName?: string, birthYear?: number }) {
-        const newDirector = new Director();
-        if (obj.id) newDirector.id = obj.id;
-        if (obj.firstName) newDirector.firstName = obj.firstName;
-        if (obj.lastName) newDirector.lastName = obj.lastName;
-        if (obj.birthYear) newDirector.birthYear = obj.birthYear;
-        return newDirector;
-    }
+	public static newDirector(obj: { id?: number, firstName?: string, lastName?: string, birthYear?: number }) {
+		const newDirector = new Director();
+		if (obj.id) newDirector.id = obj.id;
+		if (obj.firstName) newDirector.firstName = obj.firstName;
+		if (obj.lastName) newDirector.lastName = obj.lastName;
+		if (obj.birthYear) newDirector.birthYear = obj.birthYear;
+		return newDirector;
+	}
 
 }

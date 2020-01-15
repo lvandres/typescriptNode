@@ -1,4 +1,3 @@
-import { IRouterContext } from "koa-router";
 import { Inject, Singleton } from "typescript-ioc";
 import UserService from "../services/UserService";
 import { GenericController, IController } from "./GenericController";

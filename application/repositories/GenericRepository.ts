@@ -1,4 +1,4 @@
-import { Repository, InsertResult, SelectQueryBuilder } from 'typeorm';
+import { Repository, InsertResult } from 'typeorm';
 import { Pagination, IPagination } from '../shared/models/pagination';
 import { EntitiesResponse } from '../shared/responses/IEntitiesResponse';
 import EntityNotFoundError from '../exceptions/EntityNotFoundError';
