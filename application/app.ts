@@ -5,7 +5,7 @@ import { Container } from 'typescript-ioc';
 
 import { createConnection } from 'typeorm';
 import { DB_CONFIG } from './config/db.config';
-
+import { registerRequest, register } from './utils/logger';
 import Router from './routes/IndexRoutes';
 
 export class App {
@@ -19,6 +19,7 @@ export class App {
 
 		app.use(logger());
 		app.use(bodyParser());
+		app.use(registerRequest(register));
 		app.use(router.routes());
 		app.use(router.allowedMethods());
 
