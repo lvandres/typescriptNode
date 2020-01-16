@@ -1,4 +1,4 @@
-FROM node:10.16.0-alpine
+FROM node:10.15.2-stretch
 
 EXPOSE 3000
 
@@ -6,11 +6,9 @@ RUN mkdir -p /usr/app
 
 WORKDIR /usr/app
 
-COPY application/package.json .
+COPY application/. .
 
 RUN npm install nodemon -g && npm install && npm cache clean --force
-
-COPY application/. .
 
 ENV DB_HOST changeme
 ENV DB_PORT changeme

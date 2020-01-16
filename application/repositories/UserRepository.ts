@@ -6,6 +6,7 @@ import { GenericRepository, IRepository } from './GenericRepository';
 @Singleton
 export default class UserRepository extends GenericRepository<User> implements IRepository<User> {
 	nameClass = 'User';
+
 	constructor() {
 		super();
 	}

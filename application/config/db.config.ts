@@ -12,16 +12,13 @@ export const DB_CONFIG: ConnectionOptions = {
 	'synchronize': true,
 	'logging': false,
 	'entities': [
-		`${dirBase}/entity/*.ts`,
-		`${dirBase}/entity/*.js`
+		`${dirBase}/entity/*{.ts,.j_s}`
 	],
 	'subscribers': [
-		`${dirBase}/subscriber/*.ts`,
-		`${dirBase}/subscriber/*.js`
+		`${dirBase}/subscriber/*{.ts,.j_s}`
 	],
 	'migrations': [
-		`${dirBase}/migration/*.ts`,
-		`${dirBase}/migration/*.js`
+		`${dirBase}/migration/*{.ts,.j_s}`
 	],
 	'cli': {
 		'entitiesDir': `${dirBase}/entity`,
