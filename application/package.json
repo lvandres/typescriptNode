@@ -13,7 +13,10 @@
         "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test",
         "migration:generate": "ts-node node_modules/.bin/typeorm migration:generate --config ./config/orm.config.json --name",
         "migration:run": "ts-node node_modules/.bin/typeorm migration:run --config ./config/orm.config.json",
-        "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert --config ./config/orm.config.json"
+        "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert --config ./config/orm.config.json",
+        "typeorm:drop": "ts-node node_modules/.bin/typeorm schema:drop --config ./config/orm.config.json",
+        "typeorm:clear": "ts-node node_modules/.bin/typeorm cache:clear --config ./config/orm.config.json",
+        "typeorm:sync": "ts-node node_modules/.bin/typeorm schema:sync --config ./config/orm.config.json"
     },
     "keywords": [],
     "author": "",
