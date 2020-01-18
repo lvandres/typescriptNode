@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { hashSync, genSaltSync, compareSync } from 'bcryptjs';
 import { Role } from '../../shared/enums/role';
 
 @Entity()
@@ -53,12 +54,8 @@ export default class User {
 		this.email = value;
 	}
 
-	public get Password(): string {
-		return this.password;
-	}
-
 	public set Password(value: string) {
-		this.password = value;
+		this.password = hashSync(value, User.getSalt());
 	}
 
 	public get Role(): Role {
@@ -119,5 +116,13 @@ export default class User {
 		if (obj.role) newUser.Role = obj.role;
 		newUser.IsActive = obj.isActive || false;
 		return newUser;
+	}
+
+	private static getSalt() {
+		return genSaltSync(12);
+	}
+
+	public validatePassword(unencryptedPassword: string) {
+		return compareSync(unencryptedPassword, this.password);
 	}
 }

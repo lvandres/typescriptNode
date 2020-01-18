@@ -3,8 +3,6 @@ import UserService from '../services/UserService';
 import { GenericController, IController } from './GenericController';
 import User from '../database/entity/User';
 import { IRouterContext } from 'koa-router';
-import { sign, verify } from 'jsonwebtoken';
-import { AppConfig } from '../config/app.config';
 
 @Singleton
 export default class UserController extends GenericController<User> implements IController {
@@ -17,10 +15,28 @@ export default class UserController extends GenericController<User> implements I
 
 	public async getAll(ctx: IRouterContext) {
 		const page = ctx.query.page || 1;
-		const newToken = sign({ username: 'luis', lastname: 'vega', role: 2 }, AppConfig.JWTSECRET, {
-			expiresIn: '1d'
-		});
-		ctx.set('token', newToken);
 		ctx.body = await this.userService.findAll(page);
+	}
+
+	public async create(ctx: IRouterContext) {
+		try {
+			const user: User = User.newUser(ctx.request.body);
+			const result = await this.service.save(user);
+			ctx.body = result;
+		} catch (e) {
+			ctx.throw(400, e.message);
+		}
+	}
+
+	public async login(ctx: IRouterContext) {
+		const { email, password } = ctx.request.body;
+		if (!(email && password)) ctx.throw(400);
+		try {
+			const newToken = await this.userService.login(email, password);
+			ctx.set('x-token', newToken);
+			ctx.status = 200;
+		} catch (e) {
+			ctx.throw(401, 'Usuario o password incorrectos.');
+		}
 	}
 }

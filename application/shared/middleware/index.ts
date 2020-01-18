@@ -3,6 +3,7 @@ import { IRouterContext } from 'koa-router';
 import { sign, verify } from 'jsonwebtoken';
 import { AppConfig } from '../../config/app.config';
 import UserService from '../../services/UserService';
+import { Role } from '../enums/role';
 
 export default class Middlewares {
 	constructor(
@@ -20,12 +21,24 @@ export default class Middlewares {
 			ctx.throw(401);
 		}
 
-		const { username, lastname } = jwtPayload;
-		const newToken = sign({ username, lastname }, AppConfig.JWTSECRET, {
-			expiresIn: '1d'
-		});
-
-		ctx.set('token', newToken);
+		const { id, name, lastName, role } = jwtPayload;
+		const newToken = sign({ id, name, lastName, role },
+			AppConfig.JWTSECRET, { expiresIn: '1d' });
+		ctx.set('x-token', newToken);
 		await next();
 	}
+
+	validRole(roles: Array<Role>) {
+		return async (ctx: IRouterContext, next: () => Promise<any>) => {
+			const id = ctx.state.jwtPayload.id;
+			try {
+				const user = await this.userService.findById(id);
+				if (roles.indexOf(user.Role) > -1) await next();
+				else ctx.throw(401);
+			} catch (e) {
+				ctx.throw(401);
+			}
+		}
+	}
+
 }
