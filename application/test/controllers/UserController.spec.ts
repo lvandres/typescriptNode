@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Context } from "koa";
+import { Context, Request } from "koa";
 import { IRouterContext } from "koa-router";
 import "mocha";
 import * as sinon from "sinon";
@@ -20,6 +20,14 @@ describe("UserController", () => {
 	const userWithId: User = UserTestBuilder.newUser().withDefaultValues().withId(testId).build();
 	const userWithoutId: User = UserTestBuilder.newUser().withDefaultValues().build();
 
+	interface ICustomRequest extends Request {
+		body: object;
+		header: object;
+	}
+	interface ICustomRouterContext extends IRouterContext {
+		request: ICustomRequest
+	}
+
 	beforeEach(() => {
 		userService = mock(UserService);
 		controllerUnderTest = new UserController(instance(userService));
@@ -39,6 +47,24 @@ describe("UserController", () => {
 			await controllerUnderTest.getAll(ctx);
 
 			expect(ctx.body).to.equal(response);
+		});
+	});
+
+
+	describe("login user", () => {
+		const body = { email: userWithId.Email, password: "password" };
+		const response = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliMzFkY2ZhLTA2MmMtNDI5My1hMGZhLWQxNzBhODMzNzI2YiIsIm5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0IGxhc3QgbmFtZSIsInJvbGUiOjIsImlhdCI6MTU3OTMxOTQxNywiZXhwIjoxNTc5NDA1ODE3fQ.6jz3rZGC_VTLl87YiS-zlXDVkAW8pQCxBVpuPWuv3Pk';
+
+		it("puts the token on the header", async () => {
+			when(userService.login(body.email, body.password)).thenReturn(Promise.resolve(response));
+			const ctx: ICustomRouterContext = {
+				request: { body },
+				throw: () => null,
+				header: Object,
+				set: (key: string, value: string) => { ctx.header[key]= value; }
+			} as ICustomRouterContext;
+			await controllerUnderTest.login(ctx);
+			expect(ctx.header['x-token']).to.equal(response);
 		});
 	});
 

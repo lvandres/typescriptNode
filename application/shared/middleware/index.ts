@@ -12,7 +12,7 @@ export default class Middlewares {
 
 	async validToken(ctx: IRouterContext, next: () => Promise<any>) {
 		let jwtPayload;
-		const token = <string>ctx.header.token;
+		const token = <string>ctx.header['x-token'];
 
 		try {
 			jwtPayload = <any>verify(token, AppConfig.JWTSECRET);
@@ -38,7 +38,7 @@ export default class Middlewares {
 			} catch (e) {
 				ctx.throw(401);
 			}
-		}
+		};
 	}
 
 }

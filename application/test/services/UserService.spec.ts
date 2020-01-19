@@ -71,7 +71,7 @@ describe('UserService', () => {
 
 	});
 
-	describe('login', () => {
+	describe('login error', () => {
 		it('should return message error for email incorrect', async () => {
 			when(userRepository.findByEmail(testUserWithId.Email)).thenReturn(Promise.resolve(testUserWithId));
 			try {

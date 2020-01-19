@@ -48,7 +48,7 @@ export default class UserTestBuilder {
 
 	public withDefaultValues(): UserTestBuilder {
 		return this
-			.withName('John@gmail.com')
+			.withEmail('John@gmail.com')
 			.withName('John')
 			.withLastName('Lasseter')
 			.withPassword('password')

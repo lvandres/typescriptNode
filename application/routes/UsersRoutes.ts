@@ -23,7 +23,7 @@ export default class UserRoutes {
 		router.post(
 			'/users',
 			this.middleares.validToken,
-			this.middleares.validRole([Role.Admin, Role.Editor]).bind(this.middleares),
+			this.middleares.validRole([Role.Admin, Role.Editor, Role.Guest]).bind(this.middleares),
 			(ctx: IRouterContext) => this.userController.create(ctx)
 		);
 		router.put('/users/:id', (ctx: IRouterContext) => this.userController.update(ctx));

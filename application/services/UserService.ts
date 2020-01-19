@@ -22,7 +22,7 @@ export default class UserService extends GenericService<User> implements IServic
 		} catch (e) {
 			throw(new Error('Usuario incorrecto'));
 		}
-		if(!result) throw(new Error('Password incorrecto'));
+		if (!result) throw(new Error('Password incorrecto'));
 		const jwtPayload = { id : user.Id, name: user.Name, lastName: user.LastName, role: user.Role };
 		const newToken = sign( jwtPayload, AppConfig.JWTSECRET, { expiresIn: '1d' } );
 		return Promise.resolve(newToken);
