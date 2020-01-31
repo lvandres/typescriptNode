@@ -1,0 +1,7 @@
+{
+	"watch": ["./"],
+	"ext": "ts",
+	"ignore": ["./**/*.spec.ts"],
+	"exec": "node -r ts-node/register --inspect=9229 ./index.ts",
+	"verbose": true
+}

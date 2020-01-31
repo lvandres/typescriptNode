@@ -28,8 +28,9 @@ export class App {
 
 	public async start() {
 		const app = await this.createApp();
-		console.log('Started listening on port 3000...');
-		const server = app.listen(3000);
+		const PORT = process.env.PORT_APP || 3000;
+		console.log(`Started listening on port ${PORT}...`);
+		const server = app.listen(PORT);
 		return Promise.resolve(server);
 	}
 }

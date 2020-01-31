@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
-const dirBase = process.env.PRODUCTION ? 'dist/database' : 'database';
+const dirBase = process.env.NODE_ENV === 'production' ? 'dist/database' : 'database';
 
 export const DB_CONFIG: ConnectionOptions = {
 	'name': 'default',

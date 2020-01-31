@@ -7,3 +7,4 @@ package-lock.json
 application/dist/*
 logs/*
 application/config/orm.config.json
+.vscode/launch.json
